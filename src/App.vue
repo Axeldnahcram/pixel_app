@@ -1,17 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <p>{{color}}</p>
+    <ColorPanel :color=color />
+    <DrawPanel/>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Pixel from './components/Pixel'
+import DrawPanel from './components/DrawPanel'
+import ColorPanel from './components/ColorPanel'
 
 export default {
   name: "app",
   components: {
-    HelloWorld
+    DrawPanel,
+    ColorPanel,
+    Pixel
+  },
+  data: function(){
+    return {
+      color: 'white'
+    }
+  },
+  mounted() {
+    this.$root.$on('updatecolor', color => {
+      this.color = color
+    })
   }
 };
 </script>
